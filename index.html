@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css" />
+    <title>Recipes</title>
+    <script>
+
+        // need to
+
+// This section counts the number of rounds.
+let round = 0;
+let userScore = 0;
+let computerScore = 0;
+let maxRounds = 0;
+
+
+
+function rounds() {
+  round++;
+  maxRounds++;
+  document.querySelector("#round").innerHTML = round;
+  // template literal
+  if (maxRounds < 3) {
+    if (round === 3) {
+      // plug in the value of round
+      //alert(`Count is now ${round}`); // add declare winner
+      if (computerScore > userScore && computerScore === 2) {
+        document.querySelector("#roundWinner").innerHTML = "Computer Wins!";
+        // alert("Computer Wins the Game");
+      } else if (userScore > computerScore && userScore === 2) {
+        document.querySelector("#roundWinner").innerHTML = "You Win!";
+        // alert("You Win!");
+      } else {
+        document.querySelector("#roundWinner").innerHTML = "Stalemate!";
+        // alert("Nobody won.");
+      }
+
+      return false;
+    }
+  } else {
+    document.querySelector("#gameWinner").innerHTML = "Game Over";
+    document.querySelector("#restartBtn").innerHTML = "Play Again?";
+
+  }
+}
+
+
+function getComputerScore() {
+  computerScore++;
+  document.querySelector("#computerScore").innerHTML = computerScore;
+  //   console.log(computerScore);
+}
+
+function getUserScore() {
+  userScore++;
+  document.querySelector("#userScore").innerHTML = userScore;
+  // console.log(userScore);
+}
+
+function getRoundWinner(user, computer) {
+  let computerWins = false;
+  let userWins = false;
+
+  if (user === "Rock" && computer === "Paper") {
+    document.querySelector("#winner").innerHTML =
+      "Paper covers rock. Computer wins round.";
+    // console.log("Paper covers rock. Computer wins round.");
+    computerWins = true;
+  } else if (user === "Paper" && computer === "Rock") {
+    document.querySelector("#winner").innerHTML =
+      "Paper covers rock. You win this round!";
+    // console.log("Paper covers rock. You win this round!");
+    userWins = true;
+  } else if (user === "Paper" && computer === "Scissors") {
+    document.querySelector("#winner").innerHTML =
+      "Scissors cut paper. Computer wins round.";
+    // console.log("Scissors cut paper. Computer wins round.");
+    computerWins = true;
+  } else if (user === "Scissors" && computer === "Paper") {
+    document.querySelector("#winner").innerHTML =
+      "Scissors cut paper. You win this round!";
+    // console.log("Scissors cut paper. You win this round!");
+    userWins = true;
+  } else if (user === "Scissors" && computer === "Rock") {
+    document.querySelector("#winner").innerHTML =
+      "Rocks crush scissors. Computer wins round.";
+    console.log("Rocks crush scissors. Computer wins round.");
+    computerWins = true;
+  } else if (user === "Rock" && computer === "Scissors") {
+    document.querySelector("#winner").innerHTML =
+      "Rock crushes scissors. You win this round!";
+    // console.log("Rock crushes scissors. You win this round!");
+    userWins = true;
+  } else {
+    document.querySelector("#winner").innerHTML = "Tie!";
+    // console.log("Tie!");
+  }
+
+  if (userWins === true) {
+    getUserScore();
+  } else if (computerWins === true) {
+    getComputerScore();
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  // This changes the color of the heading
+  // document.querySelectorAll(".colors").forEach(function (button) {
+  //   button.onclick = function () {
+  //     document.querySelector("#hello").style.color = button.dataset.color;
+  //   };
+  // This section changes the user move
+  document.querySelectorAll(".userMove").forEach(function (button) {
+    // this is the game function
+    button.onclick = function () {
+      let userMove = button.dataset.move;
+      // console.log(userMove);
+      let moves = ["Rock", "Paper", "Scissors"];
+      let computerMove = moves[Math.floor(Math.random() * moves.length)];
+      // console.log(computerMove);
+
+      console.log(userMove, computerMove); // This will be an HTML element.
+
+      getRoundWinner(userMove, computerMove);
+      rounds();
+    };
+  });
+});
+
+
+    </script>
+
+
+<!-- <h1 id="hello">Hello</h1>
+<button class="colors" data-color="red">Red</button>
+<button class="colors" data-color="blue">Blue</button>
+<button class="colors" data-color="green">Green</button>
+ -->
+ <h1>Rock Paper Scissors</h1>
+ <!-- <h1>Hello</h1> -->
+ <!-- <h4 id="round">0</h4> -->
+ <br>
+ <h3 id="userMove">Make Your Move</h3>
+ <button class="userMove" data-move="Rock">Rock</button>
+ <button class="userMove" data-move="Paper">Paper</button>
+ <button class="userMove" data-move="Scissors">Scissors</button>
+ <br>
+ <p>Your Score | <span id="userScore">0</span></p>
+ <p>Computer Score | <span id="computerScore">0</span></p>
+ <br>
+ <p><strong>Round </strong><span id="round"> </span> | <span id="winner"> </span></p>
+ 
+ <h3 id="roundWinner"> </h3>
+ <h3 id="gameWinner"> </h3>
+ <button id="restartBtn"> </button>
+ </head>
