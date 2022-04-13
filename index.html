@@ -8,15 +8,11 @@
     <title>Recipes</title>
     <script>
 
-        // need to
-
 // This section counts the number of rounds.
 let round = 0;
 let userScore = 0;
 let computerScore = 0;
 let maxRounds = 0;
-
-
 
 function rounds() {
   round++;
@@ -40,24 +36,31 @@ function rounds() {
 
       return false;
     }
-  } else {
-    document.querySelector("#gameWinner").innerHTML = "Game Over";
-    document.querySelector("#restartBtn").innerHTML = "Play Again?";
-
   }
 }
-
 
 function getComputerScore() {
   computerScore++;
   document.querySelector("#computerScore").innerHTML = computerScore;
   //   console.log(computerScore);
+  if (computerScore === 5) {
+    computerScore = 5;
+    // console.log("Computer Wins the Game")
+    confirm("Computer Score: 5 Points! Computer Wins the Game!");
+    location.reload();
+  }
 }
 
 function getUserScore() {
   userScore++;
   document.querySelector("#userScore").innerHTML = userScore;
   // console.log(userScore);
+  if (userScore === 5) {
+    userScore = 5;
+    // console.log("You Win the Game!")
+    confirm("User Score: 5 Points! You Win the Game!");
+    location.reload();
+  }
 }
 
 function getRoundWinner(user, computer) {
@@ -107,11 +110,6 @@ function getRoundWinner(user, computer) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  // This changes the color of the heading
-  // document.querySelectorAll(".colors").forEach(function (button) {
-  //   button.onclick = function () {
-  //     document.querySelector("#hello").style.color = button.dataset.color;
-  //   };
   // This section changes the user move
   document.querySelectorAll(".userMove").forEach(function (button) {
     // this is the game function
@@ -122,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
       let computerMove = moves[Math.floor(Math.random() * moves.length)];
       // console.log(computerMove);
 
-      console.log(userMove, computerMove); // This will be an HTML element.
+      console.log(userMove, computerMove);
 
       getRoundWinner(userMove, computerMove);
       rounds();
@@ -134,15 +132,8 @@ document.addEventListener("DOMContentLoaded", function () {
     </script>
 
 
-<!-- <h1 id="hello">Hello</h1>
-<button class="colors" data-color="red">Red</button>
-<button class="colors" data-color="blue">Blue</button>
-<button class="colors" data-color="green">Green</button>
- -->
+<body>
  <h1>Rock Paper Scissors</h1>
- <!-- <h1>Hello</h1> -->
- <!-- <h4 id="round">0</h4> -->
- <br>
  <h3 id="userMove">Make Your Move</h3>
  <button class="userMove" data-move="Rock">Rock</button>
  <button class="userMove" data-move="Paper">Paper</button>
@@ -150,10 +141,10 @@ document.addEventListener("DOMContentLoaded", function () {
  <br>
  <p>Your Score | <span id="userScore">0</span></p>
  <p>Computer Score | <span id="computerScore">0</span></p>
- <br>
  <p><strong>Round </strong><span id="round"> </span> | <span id="winner"> </span></p>
  
  <h3 id="roundWinner"> </h3>
  <h3 id="gameWinner"> </h3>
- <button id="restartBtn"> </button>
  </head>
+</body>
+</html>
